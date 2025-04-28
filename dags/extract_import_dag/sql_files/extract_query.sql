@@ -1,0 +1,1 @@
+select * from database.stage.table;

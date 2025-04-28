@@ -1,0 +1,10 @@
+dw_commands:
+  truncate_stage:
+    sql: "sql_files/truncate_stage.sql"
+    source: "database.stage.table"
+    conn: "target_conn"
+  insert_bronze:
+    sql: "sql_files/insert_stage_bronze.sql"
+    source: "database.stage.table"
+    target: "database.bronze.table"
+    conn: "target_conn"
