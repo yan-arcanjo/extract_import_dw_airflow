@@ -46,7 +46,7 @@ with DAG(
      
     truncate_stage = PostgresOperator(
         task_id='truncate_stage',
-        sql='sql_files/truncate_stage.sql',
+        sql=dw_truncate_stage['sql'],
         postgres_conn_id=dw_truncate_stage['conn'],
         params={'source': dw_truncate_stage['source']}
     )
@@ -62,7 +62,7 @@ with DAG(
 
     insert_stage_silver = PostgresOperator(
         task_id='insert_stage_silver',
-        sql='sql_files/insert_stage_bronze.sql',
+        sql=dw_insert_bronze['sql'],
         postgres_conn_id=dw_insert_bronze['conn'],
         params={'source': dw_insert_bronze['source'], 'target': dw_insert_bronze['target']}
     )
