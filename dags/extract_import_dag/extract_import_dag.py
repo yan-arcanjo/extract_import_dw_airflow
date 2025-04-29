@@ -60,8 +60,8 @@ with DAG(
         target_table='database.stage.table'
     )   
 
-    insert_stage_silver = PostgresOperator(
-        task_id='insert_stage_silver',
+    insert_stage_bronze = PostgresOperator(
+        task_id='insert_stage_bronze',
         sql=dw_insert_bronze['sql'],
         postgres_conn_id=dw_insert_bronze['conn'],
         params={'source': dw_insert_bronze['source'], 'target': dw_insert_bronze['target']}
@@ -72,6 +72,6 @@ with DAG(
         trigger_dag_id="extract_import_silver",  # Nome da DAG a ser acionada
     )
 
-    (truncate_stage >> extraction >> insert_stage_silver >> trigger_dag)
+    (truncate_stage >> extraction >> insert_stage_bronze >> trigger_dag)
 
 
